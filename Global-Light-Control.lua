@@ -10,7 +10,7 @@ MaxDimLevel = 60
 SunsetOffset = 60
 -- How much later should the script calculate the sunrise Dim level?
 SunriseOffset = 60
--- From what time should the script calculate the sunrise? Count from 0:00, for example after 05:00 SunriseMinTimeOffset = 300
+-- From what time should the script calculate the sunrise? Count from 0:00, for example after 05:00 SunriseTimeOffset = 300
 SunriseTimeOffset = 300
 -- How long should the script wait to turn off the lights after no devices report the lights should be turned on?
 LightSwitchTimeoutValue = 10
