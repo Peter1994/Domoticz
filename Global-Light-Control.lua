@@ -148,16 +148,16 @@ Debug("--------------- START ---------------")
 Debug("The script has been activated.")
 
 -- Check if Motion is detected or if one of the Wall Plugs is reporting power usage
-if (otherdevices_svalues['Motion Sensor'] > '0' or tonumber(otherdevices_svalues['Living Room - TV']) > 80 or tonumber(otherdevices_svalues['Living Room - PC']) > 100 or otherdevices['950XL Peter'] == 'On') then
+if (tonumber(otherdevices_svalues['Motion Sensor']) > 0 or tonumber(otherdevices_svalues['Living Room - TV']) > 80 or tonumber(otherdevices_svalues['Living Room - PC']) > 100 or otherdevices['950XL Peter'] == 'On') then
     
     Debug("It seems like somebody is home...")
     
-        -- First check if the Lux level is under certain value
+        -- First check if the Lux level is under a certain value
         if (tonumber(otherdevices_svalues['Lux Sensor']) <= 30) then
     
             Debug("Lux Sensor reporting Lux value under 30")
     
-            -- Check if current time is 30 minutes before sunset
+            -- Check if current time is configured before sunset
             if (minutesnow >= timeofday['SunsetInMinutes'] - SunsetOffset) then
 
                 -- Switch lights to on with decided dim level
@@ -167,7 +167,7 @@ if (otherdevices_svalues['Motion Sensor'] > '0' or tonumber(otherdevices_svalues
                 SwitchLight('Living Room', SwitchDimLevel)
                 SwitchLight('Kitchen', SwitchDimLevel)
 
-            -- Check if current time is 240 minutes before sunrise and 30 minutes after sunrise
+            -- Check if current time is between configured sunrise time
             elseif (minutesnow >= 0 and minutesnow <= timeofday['SunriseInMinutes'] + SunriseOffset) then
 
                 -- Switch lights to on with decided dim level
@@ -192,7 +192,7 @@ if (otherdevices_svalues['Motion Sensor'] > '0' or tonumber(otherdevices_svalues
     end
 
 -- Check if power usage is high enough to keep the lights at current state
-elseif(otherdevices_svalues['Motion Sensor'] == '0' or tonumber(otherdevices_svalues['Living Room - TV']) < 80 and tonumber(otherdevices_svalues['Living Room - PC']) < 100) then
+elseif(tonumber(otherdevices_svalues['Motion Sensor']) == 0 and tonumber(otherdevices_svalues['Living Room - TV']) < 80 and tonumber(otherdevices_svalues['Living Room - PC']) < 100) then
 
     Debug("It seems like nobody is home...")
     -- Timeout check to prevent the lights switchting on right after they have been turned off
